@@ -6,16 +6,16 @@
     <ignored path=".idea/workspace.xml" />
     <file path="/LoginPanel.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366807601503" ignored="false" />
     <file path="/app.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366131199976" ignored="false" />
-    <file path="/MainPanel.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366841897270" ignored="false" />
+    <file path="/MainPanel.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1367423834473" ignored="false" />
     <file path="/default-theme.scss" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1365672344410" ignored="false" />
     <file path="/Places.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366388040931" ignored="false" />
-    <file path="/SearchResult.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366120163915" ignored="false" />
-    <file path="/PlacesStore.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366131456797" ignored="false" />
+    <file path="/SearchResult.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1367406624933" ignored="false" />
+    <file path="/PlacesStore.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1367423541656" ignored="false" />
     <file path="/SearchResultDetail.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366808627836" ignored="false" />
     <file path="/a.dummy" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1365691529091" ignored="false" />
     <file path="/Control.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366125514756" ignored="false" />
     <file path="/index.html" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366126623440" ignored="false" />
-    <file path="/Application.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366808814006" ignored="false" />
+    <file path="/Application.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1367367767947" ignored="false" />
     <file path="/InputView.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366725974805" ignored="false" />
     <file path="/CheckinResult.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366304215075" ignored="false" />
     <file path="/CheckInResult.js" changelist="1473c915-fb58-45d9-9d3e-782e8ed6437c" time="1366386677556" ignored="false" />
@@ -39,19 +39,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainPanel.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MainPanel.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/MainPanel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="199" column="17" selection-start="5746" selection-end="5746" vertical-scroll-proportion="0.32258064">
+            <state line="86" column="29" selection-start="2774" selection-end="2774" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Application.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Application.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controller/Application.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="105" column="6" selection-start="2828" selection-end="2828" vertical-scroll-proportion="0.0">
+            <state line="240" column="53" selection-start="6363" selection-end="6363" vertical-scroll-proportion="0.29032257">
               <folding />
             </state>
           </provider>
@@ -60,7 +60,7 @@
       <file leaf-file-name="LoginPanel.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/LoginPanel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="45" selection-start="2657" selection-end="2657" vertical-scroll-proportion="0.0">
+            <state line="129" column="40" selection-start="3263" selection-end="3263" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -69,7 +69,7 @@
       <file leaf-file-name="InputView.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/InputView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="87" column="13" selection-start="2628" selection-end="2628" vertical-scroll-proportion="0.0">
+            <state line="93" column="38" selection-start="2833" selection-end="2833" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -78,7 +78,7 @@
       <file leaf-file-name="SearchResult.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/SearchResult.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="37" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
+            <state line="37" column="72" selection-start="990" selection-end="990" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -87,7 +87,7 @@
       <file leaf-file-name="GooglePlacesStore.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/store/GooglePlacesStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="31" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
+            <state line="467" column="83" selection-start="24783" selection-end="24783" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -96,7 +96,7 @@
       <file leaf-file-name="CheckInResult.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/CheckInResult.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="37" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0">
+            <state line="12" column="30" selection-start="335" selection-end="335" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -105,7 +105,7 @@
       <file leaf-file-name="SearchResultDetail.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/SearchResultDetail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="0" selection-start="1560" selection-end="1560" vertical-scroll-proportion="0.0">
+            <state line="18" column="29" selection-start="464" selection-end="464" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -123,7 +123,7 @@
       <file leaf-file-name="PlacesStore.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/store/PlacesStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="54" selection-start="347" selection-end="347" vertical-scroll-proportion="0.0">
+            <state line="22" column="31" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -140,28 +140,28 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/packager.json" />
-        <option value="$PROJECT_DIR$/app/view/SearchResult.js" />
         <option value="$PROJECT_DIR$/app/controller/Control.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/app/store/PlacesStore.js" />
         <option value="$PROJECT_DIR$/app/view/CheckinResults.js" />
         <option value="$PROJECT_DIR$/app/view/CheckinResult.js" />
         <option value="$PROJECT_DIR$/app/view/CheckInResult.js" />
         <option value="$PROJECT_DIR$/app/controller/CheckInResultController.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/app/model/Places.js" />
-        <option value="$PROJECT_DIR$/app/view/InputView.js" />
-        <option value="$PROJECT_DIR$/app/view/LoginPanel.js" />
         <option value="$PROJECT_DIR$/app/view/SearchResultDetail.js" />
-        <option value="$PROJECT_DIR$/app/controller/Application.js" />
+        <option value="$PROJECT_DIR$/app/view/LoginPanel.js" />
         <option value="$PROJECT_DIR$/app/view/MainPanel.js" />
+        <option value="$PROJECT_DIR$/app/store/PlacesStore.js" />
+        <option value="$PROJECT_DIR$/app/view/InputView.js" />
+        <option value="$PROJECT_DIR$/app/controller/Application.js" />
+        <option value="$PROJECT_DIR$/app/view/SearchResult.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
+    <option name="width" value="1378" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -399,13 +399,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1378" height="744" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24944155" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2293373" sideWeight="0.6710013" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22927558" sideWeight="0.6710013" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -485,9 +485,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/model/Places.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="41" selection-start="855" selection-end="855" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="39" column="41" selection-start="855" selection-end="855" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
@@ -512,44 +510,14 @@
         <state line="9" column="0" selection-start="283" selection-end="283" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/GooglePlacesStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="31" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/store/PlacesStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="54" selection-start="347" selection-end="347" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/model/Places.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="41" selection-start="855" selection-end="855" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/SearchResult.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="37" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="39" column="41" selection-start="855" selection-end="855" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/CheckInResult.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="37" selection-start="457" selection-end="457" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/InputView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="13" selection-start="2628" selection-end="2628" vertical-scroll-proportion="0.0">
+        <state line="12" column="30" selection-start="335" selection-end="335" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -561,30 +529,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/LoginPanel.js">
+    <entry file="file://$PROJECT_DIR$/app/view/InputView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="45" selection-start="2657" selection-end="2657" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/SearchResultDetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="0" selection-start="1560" selection-end="1560" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controller/Application.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="6" selection-start="2828" selection-end="2828" vertical-scroll-proportion="0.0">
+        <state line="93" column="38" selection-start="2833" selection-end="2833" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/MainPanel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="199" column="17" selection-start="5746" selection-end="5746" vertical-scroll-proportion="0.32258064">
+        <state line="86" column="29" selection-start="2774" selection-end="2774" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/store/PlacesStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="31" selection-start="510" selection-end="510" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/SearchResultDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="29" selection-start="464" selection-end="464" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/SearchResult.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="72" selection-start="990" selection-end="990" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/store/GooglePlacesStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="467" column="83" selection-start="24783" selection-end="24783" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/LoginPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="129" column="40" selection-start="3263" selection-end="3263" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controller/Application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="240" column="53" selection-start="6363" selection-end="6363" vertical-scroll-proportion="0.29032257">
           <folding />
         </state>
       </provider>

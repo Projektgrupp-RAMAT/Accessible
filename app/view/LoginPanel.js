@@ -101,7 +101,6 @@ Ext.define('Accessible.view.LoginPanel', {
             FB.login(function(response) {
                     if (response.authResponse) {
                         Accessible.fbLoggedIn = '1';
-                        console.log(Accessible.fbLoggedIn);
                         // connected
                         onLogin();
 

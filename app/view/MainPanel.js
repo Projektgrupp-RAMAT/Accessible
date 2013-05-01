@@ -11,6 +11,7 @@ Ext.define('Accessible.view.MainPanel', {
 
     extend: 'Ext.tab.Panel',
     xtype: 'mainView',
+    id: 'mainViewId',
 
     config: {
 
@@ -146,14 +147,13 @@ Ext.define('Accessible.view.MainPanel', {
     onSearchButtonTap: function () {
 
 
-
         Ext.getCmp('searchNav').push(Ext.create('Accessible.view.SearchResult'));
 
 
     },
-    onLogOut: function() {
+    onLogOut: function () {
 
-        FB.logout(function(response) {
+        FB.logout(function (response) {
             // user is now logged out
             var me = this;
             me.login = Ext.create('Accessible.view.LoginPanel', {
@@ -168,21 +168,17 @@ Ext.define('Accessible.view.MainPanel', {
         });
     },
     initialize: function () {
-        console.log(FB.getAccessToken());
-
-
-
 
         logOutButton = Ext.create('Ext.Button', {
 
-            action : 'logOutButton',
-            xtype : 'button',
-            iconCls : 'arrow_right',
+            action: 'logOutButton',
+            xtype: 'button',
+            iconCls: 'arrow_right',
             iconAlign: 'right',
             ui: 'fbButton',
-            iconMask : true,
+            iconMask: true,
             text: 'Logout',
-            align : 'right'
+            align: 'right'
 
 
         })
@@ -196,17 +192,15 @@ Ext.define('Accessible.view.MainPanel', {
 //        addButton(Ext.getCmp('searchNav'), 'logOutButton');
 //        addButton(Ext.getCmp('listNav'), 'logOutButton');
 //        addButton(Ext.getCmp('mapsNav'), 'logOutButton');
-        if( Accessible.fbLoggedIn === '1'){
-        fbPlacesStore =  Ext.create('Accessible.store.PlacesStore', {
-        });
-        }
 
+
+        //console.log(FB.getAccessToken());
         FB.api('/me', function (response) {
 
-            if( Accessible.fbLoggedIn === '1' ){
+            if (Accessible.fbLoggedIn === '1') {
 
-            document.getElementById('myText').innerHTML = 'Welcome to Eat & Hear ' + response.name + '!';
-            document.getElementById('fbPic').innerHTML = '<img src="http://graph.facebook.com/' + response.id + '/picture" />';
+                document.getElementById('myText').innerHTML = 'Welcome to Eat & Hear ' + response.name + '!';
+                document.getElementById('fbPic').innerHTML = '<img src="http://graph.facebook.com/' + response.id + '/picture" />';
             }
             else {
 
@@ -217,25 +211,24 @@ Ext.define('Accessible.view.MainPanel', {
 
         });
 
-        console.log(Accessible.fbLoggedIn);
 
         this.callParent();
 
     }
 
-  });
+});
 
-function addButton(view, buttonID){
+function addButton(view, buttonID) {
 
     view.getNavigationBar().add({
-        id : buttonID,
-        xtype : 'button',
-    //    iconCls : 'arrow_right',
-    //   iconAlign: 'right',
+        id: buttonID,
+        xtype: 'button',
+        //    iconCls : 'arrow_right',
+        //   iconAlign: 'right',
         ui: 'fbButton',
-        iconMask : true,
+        iconMask: true,
         text: 'Logout',
-        align : 'right',
+        align: 'right',
         html: '<img src= http://gfx.aftonbladet-cdn.se/image/15419059/76/normal/2bb99db0eeab4/ronnie-sandahl-byline-76.jpg width=auto align=right>'
     });
 

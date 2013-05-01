@@ -7,8 +7,7 @@ Ext.define('Accessible.store.PlacesStore', {
 
     ],
     config: {
-        autoLoad: true,
-
+        autoLoad: false,
         model: 'Accessible.model.Places',
         storeId: 'PlacesStore',
         proxy: {
@@ -22,18 +21,17 @@ Ext.define('Accessible.store.PlacesStore', {
             extraParams: {
 
                 type: 'place',
-                center: '59.16775,18.14478',
-                distance: '1000',
-                access_token: FB.getAccessToken() //använder den från första login hela tiden
+                distance: '1000'
             }
-        },
+        }/*,
         listeners: {
             'load': function (store) {
                 console.log(store.getCount());
 
 
             }
-        }
+        }  */
+
 
     }
 });
