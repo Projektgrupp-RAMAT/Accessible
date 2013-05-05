@@ -178,9 +178,14 @@ Ext.define('Accessible.controller.Application', {
         }
         checkInResultView.hide();
         checkInResultView.remove();
-    }
+    },
+     'navigationview':{ back: function() {
+    console.log("I am BACK!");
+        Ext.ComponentQuery.query('resultlist')[0].getStore().removeAll();
+//            Ext.ComponentQuery.query('resultlist')[0].destroy();
+        }
 
-
+     }
 
 
 

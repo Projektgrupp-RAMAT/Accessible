@@ -28,14 +28,16 @@ Ext.application({
         'Ext.MessageBox',
         'Ext.field.Email',
         'Ext.field.Password',
-        'Ext.navigation.View'
+        'Ext.navigation.View',
+        'Ext.Map'
 
     ],
 
     models:[
         'Comment',
         'GooglePlaces',
-        'Places'
+        'Places',
+        'Result'
     ],
 
 
@@ -49,14 +51,18 @@ Ext.application({
         'SearchResultDetail',
         'LoginPanel',
         'InputView',
-        'CheckInResult'
+        'CheckInResult',
+        'MapPanel',
+        'resultList',
+        'ResultDetail'
 
 
 
     ],
 
     stores: [
-        'GooglePlacesStore'
+        'GooglePlacesStore',
+        'SearchStore'
         //'PlacesStore'
     ],
 

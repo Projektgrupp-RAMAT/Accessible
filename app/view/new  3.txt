@@ -8,14 +8,22 @@
 
 Ext.define('Accessible.view.MainPanel', {
 
-    
+    initialize: function () {
 
+
+        FB.api('/me', function (response) {
+            document.getElementById('myText').innerHTML = 'Welcome to Eat & Hear ' + response.name + '!';
+            document.getElementById('fbPic').innerHTML = '<img src="http://graph.facebook.com/' + response.id + '/picture" />';
+
+        });
+
+
+        this.callParent();
+
+    },
     extend: 'Ext.tab.Panel',
-    xtype: 'mainView',
-    requires: [
-        'Accessible.view.resultList',
-        'Accessible.view.SearchResultDetail'
-    ],
+
+
     config: {
 
         activeItem: 0,
@@ -23,7 +31,6 @@ Ext.define('Accessible.view.MainPanel', {
             {
                 xtype: 'navigationview',
                 title: 'Home',
-                id: 'homeNav',
                 iconCls: 'home',
                 items: [
                     {
@@ -45,6 +52,14 @@ Ext.define('Accessible.view.MainPanel', {
                             {
                                 html: '',
                                 id: 'myText'
+                            },
+                            {
+                                xtype: 'button',
+                                width: '10%',
+                                height: '10%',
+                                text: 'Logout',
+                                id: 'logOutButton',
+                                ui: 'fbButton'
                             }
 
                         ]
@@ -68,22 +83,22 @@ Ext.define('Accessible.view.MainPanel', {
                             {
                                 xtype: 'textfield',
                                 label: 'Name',
-                                id: 'nameField',
-                                placeHolder: 'Restaurant XY'
+                                placeHolder: 'Restaurant XY',
+								id: 'name'
                             },
                             {
                                 xtype: 'textfield',
                                 label: 'Location',
-                                id: 'locationField',
-                                placeHolder: 'Street, City'
+                                placeHolder: 'Street, City',
+								id: 'location'
                             },
                             {
                                 xtype: 'spinnerfield',
                                 label: 'Soundlevel',
-                                id: 'soundLevelField',
                                 maxValue: 5,
                                 minValue: 1,
-                                defaultValue: 2.5
+                                defaultValue: 2.5,
+								id: 'sound'
                             },
                             {
                                 xtype: 'button',
@@ -98,14 +113,13 @@ Ext.define('Accessible.view.MainPanel', {
             {
                 xtype: 'navigationview',
                 title: 'List nearby',
-                id: 'listNav',
                 iconCls: 'locate',
                 items: [
                     {
-                        xtype: 'inputview',
+                        xtype: 'panel',
                         id: 'ListNavView',
                         title: 'List nearby',
-
+                        html: "<div>[Placeholder]</div>",
                         styleHtmlContent: true
                     }
                 ]
@@ -113,20 +127,20 @@ Ext.define('Accessible.view.MainPanel', {
             {
                 xtype: 'navigationview',
                 title: 'Maps',
-                id: 'mapsNav',
                 iconCls: 'maps',
                 items: [
                     {
-                        xtype: 'Gmaps',
+                        xtype: 'panel',
                         id: 'MapsNavView',
                         title: 'Maps',
                         styleHtmlContent: true,
-                        useCurrentLocation: true,
                         items: [
 
                             {
-                                html: "<div>'Maps'</div>"
+                                html: "<div>[Placeholder]</div>"
                             }
+
+
                         ]
                     }
                 ]
@@ -140,18 +154,26 @@ Ext.define('Accessible.view.MainPanel', {
                 fn: 'onSearchButtonTap',
                 event: 'tap',
                 delegate: '#searchButton'
+            },
+            {
+                fn: 'onLogOut',
+                event: 'tap',
+                delegate: '#logOutButton'
             }
-
         ]
     },
 
 
     onSearchButtonTap: function () {
+		
+        Ext.getCmp('searchNav').push({
+			xtype: 'searchresult'
+		});
 
+        //   console.log(Ext.getCmp('searchNav'));
 
-        console.log('test1');
-        Ext.getCmp('searchNav').push({xtype: 'searchresult'});
-
+        //   this.up.('navigationview').push(Ext.create('Accessible.view.SearchResult'));
+        // view.push(Ext.create('Accessible.view.SearchResult'));
 
     },
     onLogOut: function() {
@@ -169,78 +191,6 @@ Ext.define('Accessible.view.MainPanel', {
 
 
         });
-    },
-    initialize: function () {
-        console.log(FB.getAccessToken());
-
-
-
-
-        logOutButton = Ext.create('Ext.Button', {
-
-            action : 'logOutButton',
-            xtype : 'button',
-            iconCls : 'arrow_right',
-            iconAlign: 'right',
-            ui: 'fbButton',
-            iconMask : true,
-            text: 'Logout',
-            align : 'right'
-
-
-        })
-
-        Ext.getCmp('homeNav').getNavigationBar().add(logOutButton)
-//        Ext.getCmp('listNav').getNavigationBar().add(logOutButton)
-//        Ext.getCmp('mapsNav').getNavigationBar().add(logOutButton)
-//        Ext.getCmp('searchNav').getNavigationBar().add(logOutButton)
-
-//        addButton(Ext.getCmp('homeNav'), 'logOutButton');
-//        addButton(Ext.getCmp('searchNav'), 'logOutButton');
-//        addButton(Ext.getCmp('listNav'), 'logOutButton');
-//        addButton(Ext.getCmp('mapsNav'), 'logOutButton');
-        if( Accessible.fbLoggedIn === '1'){
-        fbPlacesStore =  Ext.create('Accessible.store.PlacesStore', {
-        });
-        }
-
-        FB.api('/me', function (response) {
-
-            if( Accessible.fbLoggedIn === '1' ){
-
-            document.getElementById('myText').innerHTML = 'Welcome to Eat & Hear ' + response.name + '!';
-            document.getElementById('fbPic').innerHTML = '<img src="http://graph.facebook.com/' + response.id + '/picture" />';
-            }
-            else {
-
-                document.getElementById('myText').innerHTML = 'Welcome to Eat & Hear Ronnie Sandahl';
-                document.getElementById('fbPic').innerHTML = '<img src="http://gfx.aftonbladet-cdn.se/image/15419059/76/normal/2bb99db0eeab4/ronnie-sandahl-byline-76.jpg" />';
-
-            }
-
-        });
-
-        console.log(Accessible.fbLoggedIn);
-
-        this.callParent();
-
     }
 
-  });
-
-function addButton(view, buttonID){
-
-    view.getNavigationBar().add({
-        id : buttonID,
-        xtype : 'button',
-    //    iconCls : 'arrow_right',
-    //   iconAlign: 'right',
-        ui: 'fbButton',
-        iconMask : true,
-        text: 'Logout',
-        align : 'right',
-        html: '<img src= http://gfx.aftonbladet-cdn.se/image/15419059/76/normal/2bb99db0eeab4/ronnie-sandahl-byline-76.jpg width=auto align=right>'
-    });
-
-
-}
+});
