@@ -2,7 +2,7 @@ var mapResults;
 
 function showDetail(target, record) {
     
-    var comp = Ext.ComponentQuery.query('#searchNav')[0];
+    var comp = Ext.ComponentQuery.query('#nearbyList')[0];
     this.showResults = Ext.create('Accessible.view.SearchResultDetail',{title: record.locationTitle(), record: record});
     this.showResults.setRecord(record);
     comp.push(this.showResults);
@@ -25,13 +25,13 @@ function showDetail(target, record) {
     }
 }
 
-Ext.define('Accessible.view.resultList', {
+Ext.define('Accessible.view.NearbyList', {
     extend: 'Ext.List',
-    xtype: 'resultlist',
-    requires: ['Accessible.store.SearchStore','Accessible.view.MapPanel'],
+    xtype: 'nearbylist',
+    requires: ['Accessible.store.SearchStore'],
     config: {
-        title: 'List',
-        itemId: 'myList',
+        title: 'Commented places',
+        itemId: 'nearbyList',
         indexBar: false,
         itemTpl: '{name} {address}',
         store: 'SearchStore',

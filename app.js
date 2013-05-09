@@ -43,12 +43,12 @@ Ext.application({
 
 
     views: [
-
+        'NearbyList',
         'InputView',
         'LoginPanel',
         'MainPanel',
         'SearchResult',
-        'SearchResultDetail',
+        //'SearchResultDetail',
         'LoginPanel',
         'InputView',
         'CheckInResult',

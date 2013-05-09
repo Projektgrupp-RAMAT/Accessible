@@ -9,6 +9,7 @@ Ext.define('Accessible.controller.Application', {
                 main: 'mainview',
                 search: 'searchNav',
                 showResults: 'search-detail',
+                searchResults: 'searchResult',
                 commentButton: '#commentButton',
                 cancelButtonComment: '#cancelButtonComment',
                 inputView: 'inputview',
@@ -89,12 +90,22 @@ Ext.define('Accessible.controller.Application', {
 
     onAddCommentTap: function () {
 
+
+
         console.log("Todo, implement comment handler-_- #yolo")
         if ( Accessible.fbLoggedIn === '1'){
+
+
         Ext.getCmp('searchNav').push(Ext.create('Accessible.view.InputView'))
         //    Ext.Viewport.setActiveItem(Ext.create('Accessible.view.InputView'));
         }else{
-            Ext.Msg.alert("Logged in as guest", "Please log in using facebook if you want to add a comment!")
+            Ext.Msg.confirm("Logged in as guest!", "As a guest you're not allowed to publish comments on places, would you like to log in using Facebook?", function(btn){
+                if (btn === 'yes'){
+
+                    guestToFbLogin();
+
+                }
+            });
         }
     },
 
@@ -107,7 +118,7 @@ Ext.define('Accessible.controller.Application', {
     onLogOut: function () {
 
 
-        console.log("Logoutpresszed");
+        console.log(Accessible.fbLoggedIn);
 
         if ( Accessible.fbLoggedIn === '1'){
         FB.logout(function (response) {
@@ -178,17 +189,69 @@ Ext.define('Accessible.controller.Application', {
         }
         checkInResultView.hide();
         checkInResultView.remove();
-    },
-     'navigationview':{ back: function() {
-    console.log("I am BACK!");
-        Ext.ComponentQuery.query('resultlist')[0].getStore().removeAll();
-//            Ext.ComponentQuery.query('resultlist')[0].destroy();
+    }
+});
+
+function guestToFbLogin(){
+
+    var searchResultView = Ext.getCmp('SearchResultViewId');
+    FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                // connected
+                onLogin();
+
+
+            } else if (response.status === 'not_authorized') {
+                // not_authorized
+                login();
+            } else {
+                login();
+                // not_logged_in
+            }
+
+        });
+
+
+        function login() {
+            FB.login(function(response) {
+                    if (response.authResponse) {
+                        Accessible.fbLoggedIn = '1';
+                        // connected
+                        onLogin();
+                    } else {
+                        // cancelled
+                    }
+                },
+                {scope: 'publish_checkins'});//facebook user permissions
+
+        }
+        function onLogin() {
+            Accessible.fbLoggedIn = '1';
+
+            FB.api('/me', function (response) {
+
+                document.getElementById('myText').innerHTML = 'Welcome to Eat & Hear ' + response.name + '!';
+                document.getElementById('fbPic').innerHTML = '<img src="http://graph.facebook.com/' + response.id + '/picture" />';
+
+            });
+
+            var fbPlacesStore = Ext.create('Accessible.store.PlacesStore', {
+                extraParams: {
+                    center: searchResultView.data.data.geometry.location.lat + ',' + searchResultView.data.data.geometry.location.lng,
+                    access_token: FB.getAccessToken()
+                }
+
+            });
+
+
+            fbPlacesStore.load({
+                params: {
+                    center: searchResultView.data.data.geometry.location.lat + ',' + searchResultView.data.data.geometry.location.lng,
+                    access_token: FB.getAccessToken()
+                }
+            })
         }
 
-     }
 
 
-
-
-
-});
+}
