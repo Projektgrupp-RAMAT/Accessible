@@ -3,9 +3,9 @@ Ext.define('Accessible.store.SearchStore',{
     
     config: {
         model:'Accessible.model.Result',
-        sorters: 'location',
+        
         grouper: function (record){
-            return record.get('location')[0];
+            return record.get('name')[0];
         }
 
     }

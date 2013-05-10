@@ -1,10 +1,10 @@
 function displayMap(position, map) {
-    console.log ( 'this latlon!');
+
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
     
-    var latlon = new google.maps.LatLng(lat, lon);
-    console.log("low: " + latlon);
+    var latlon = new google.maps.LatLng(lat,lon);
+
     infowindow = new google.maps.InfoWindow();
     var pinColor = "0000FF";
     var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
@@ -18,7 +18,7 @@ function displayMap(position, map) {
     var marker = new google.maps.Marker({
         position: latlon,
         map: map,
-        autoUpdate: false,
+//        autoUpdate: false,
         title: "You are here!",
         icon: pinImage,
         shadow: pinShadow,
@@ -72,7 +72,7 @@ function displayMap(position, map) {
         }
     });
 
-    marker.setMap(map);
+//    marker.setMap(map);
 
 
 }
@@ -101,42 +101,50 @@ function createMarker(result, map) {
                 infowindow.open(map, this);
             });
         }
-
     });
-
 }
 ;
 Ext.define('Accessible.view.MapPanel', {
     xtype: 'Gmaps',
     id: 'gmap',
     extend: 'Ext.Map',
+//    useCurrentLocation: true,
     config: {
         listeners: {
+
+        scrollable: false,
+            
             maprender: function(comp, map) {
+                
                 if (navigator.geolocation)
                 {
-                    console.log ( 'this sux!');
+//                    console.log ( 'this sux!');
                     
                     navigator.geolocation.getCurrentPosition(function(position) {
-                        console.log('Map:'+Ext.ComponentQuery.query('Gmaps')[0].getMap());
+//                        console.log('Map:'+Ext.ComponentQuery.query('Gmaps')[0].getMap());
                         displayMap(position, map);
                     });
                 }
                 else {
                     console.log("Geolocation is not supported by this browser.");
                 }
-            }
+            },
+                    afterrender: function(){
+                    
+                    }
         }
     },
     initialize: function() {
-
+       
         this.mapOptions = {
+            disableDefaultUI: true,
+            geo: new Ext.util.GeoLocation({autoLoad:false}),
             zoom: 15,
             autoUpdate: false,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             navigationControl: true
         };
-        console.log('init: '+this.getMap());
+//        console.log('init: '+this.getMap());
 //        var name = Ext.ComponentQuery.query('#name')[0].getValue();
 //				var location = Ext.ComponentQuery.query('#location')[0].getValue();
 //				var sound = Ext.ComponentQuery.query('#sound')[0].getValue();
@@ -144,6 +152,26 @@ Ext.define('Accessible.view.MapPanel', {
 
 
 
-    },
+    }
+            
+            
+      
 });
+         function renderMap(comp, map) {
+              displayMap(position, map);
+                if (navigator.geolocation)
+                {
+//                    console.log ( 'this sux!');
+                    
+                    navigator.geolocation.getCurrentPosition(function(position) {
+//                        console.log('Map:'+Ext.ComponentQuery.query('Gmaps')[0].getMap());
+//                        displayMap(position, map);
+                    });
+                }
+                else {
+                    console.log("Geolocation is not supported by this browser.");
+                    
+                }
+            }
+
 

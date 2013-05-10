@@ -96,10 +96,6 @@ Ext.define('Accessible.view.InputView', {
         );
 
 
-    },
-
-    initialize: function(){
-
     }
 
 

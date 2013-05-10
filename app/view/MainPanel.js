@@ -6,15 +6,79 @@
  * To change this template use File | Settings | File Templates.
  */
 
+function getResultList() {
+	var comp = Ext.ComponentQuery.query('map')[0];
+//    console.log( Ext.ComponentQuery.query(resultlist)[0]);
+//   var store = Ext.ComponentQuery.query('resultlist')[0].getStore();
+//   store.removeAll();
+    var request = {
+        query: Ext.ComponentQuery.query('#locationField')[0].getValue()+' in '+Ext.ComponentQuery.query('#nameField')[0].getValue()
+    };
+    var service = new google.maps.places.PlacesService(comp.getMap());
+    service.textSearch(request, function(results, status) {
+		if (status === google.maps.places.PlacesServiceStatus.OK) {
+          Ext.ComponentQuery.query('resultlist')[0].getStore().removeAll();          
+        for (var i = 0; i < results.length; i++) {
+            detailResult(results[i]);
+        }
+		}
+		 if (status === google.maps.places.PlacesServiceStatus.ERROR) {
+            console.log("Error");
+        }
+        if (status === google.maps.places.PlacesServiceStatus.INVALID_REQUEST) {
+            console.log("Invalid");
+        }
+        if (status === google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
+            console.log("Over query");
+        }
+        if (status === google.maps.places.PlacesServiceStatus.NOT_FOUND) {
+            console.log("not found");
+        }
+        if (status === google.maps.places.PlacesServiceStatus.REQUEST_DENIED) {
+            console.log("request denied");
+        }
+        if (status === google.maps.places.PlacesServiceStatus.UNKNOWN_ERROR) {
+            console.log("unknown error");
+        }
+        if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+            console.log("Zero");
+        }
+
+    });
+   
+}
+
+function detailResult(result) {
+	var store = Ext.ComponentQuery.query('resultlist')[0].getStore();
+//	var service = new google.maps.places.PlacesService(Ext.ComponentQuery.query('map')[0].getMap());
+//    var request1 = {reference: result.reference};
+//    service.getDetails(request1, function(details, status) {
+//        if (status === google.maps.places.PlacesServiceStatus.OK)
+//        {
+      //  if(result.formatted_address)
+            console.log(result.name+result.formatted_address)
+            store.add({name: result.name, address: result.formatted_address,icon: result.icon, vicinty: result.vicinty,location: result.geometry.location});
+//        }
+//        else
+//        {
+//            store.add({name: result.name, address: 'N/A'});
+//        }
+
+//    });
+	
+}
+
 Ext.define('Accessible.view.MainPanel', {
 
     
 
     extend: 'Ext.tab.Panel',
     xtype: 'mainView',
+    id: 'mainViewId',
     requires: [
         'Accessible.view.resultList',
-        'Accessible.view.SearchResultDetail'
+        'Accessible.view.SearchResultDetail',
+        'Accessible.view.NearbyList'
     ],
     config: {
 
@@ -45,7 +109,11 @@ Ext.define('Accessible.view.MainPanel', {
                             {
                                 html: '',
                                 id: 'myText'
+                            },
+                            {
+                                xtype: 'map',
                             }
+                         
 
                         ]
 
@@ -102,9 +170,9 @@ Ext.define('Accessible.view.MainPanel', {
                 iconCls: 'locate',
                 items: [
                     {
-                        xtype: 'inputview',
+                        xtype: 'nearbylist',
                         id: 'ListNavView',
-                        title: 'List nearby',
+                        title: 'Commented nearby',
 
                         styleHtmlContent: true
                     }
@@ -113,21 +181,12 @@ Ext.define('Accessible.view.MainPanel', {
             {
                 xtype: 'navigationview',
                 title: 'Maps',
-                id: 'mapsNav',
                 iconCls: 'maps',
                 items: [
                     {
                         xtype: 'Gmaps',
-                        id: 'MapsNavView',
                         title: 'Maps',
-                        styleHtmlContent: true,
                         useCurrentLocation: true,
-                        items: [
-
-                            {
-                                html: "<div>'Maps'</div>"
-                            }
-                        ]
                     }
                 ]
             }
@@ -141,16 +200,15 @@ Ext.define('Accessible.view.MainPanel', {
                 event: 'tap',
                 delegate: '#searchButton'
             }
-
         ]
     },
-
 
     onSearchButtonTap: function () {
 
 
-        console.log('test1');
-        Ext.getCmp('searchNav').push({xtype: 'searchresult'});
+      
+        getResultList();
+        Ext.getCmp('searchNav').push({xtype: 'resultlist'});
 
 
     },
@@ -171,11 +229,14 @@ Ext.define('Accessible.view.MainPanel', {
         });
     },
     initialize: function () {
+
+        
+        
         console.log(FB.getAccessToken());
 
-
-
-
+        console.log("Commented list getting filled");
+        Ext.ComponentQuery.query('nearbylist')[0].getStore().load();
+        
         logOutButton = Ext.create('Ext.Button', {
 
             action : 'logOutButton',
@@ -191,18 +252,6 @@ Ext.define('Accessible.view.MainPanel', {
         })
 
         Ext.getCmp('homeNav').getNavigationBar().add(logOutButton)
-//        Ext.getCmp('listNav').getNavigationBar().add(logOutButton)
-//        Ext.getCmp('mapsNav').getNavigationBar().add(logOutButton)
-//        Ext.getCmp('searchNav').getNavigationBar().add(logOutButton)
-
-//        addButton(Ext.getCmp('homeNav'), 'logOutButton');
-//        addButton(Ext.getCmp('searchNav'), 'logOutButton');
-//        addButton(Ext.getCmp('listNav'), 'logOutButton');
-//        addButton(Ext.getCmp('mapsNav'), 'logOutButton');
-        if( Accessible.fbLoggedIn === '1'){
-        fbPlacesStore =  Ext.create('Accessible.store.PlacesStore', {
-        });
-        }
 
         FB.api('/me', function (response) {
 

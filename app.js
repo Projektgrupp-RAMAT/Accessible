@@ -37,13 +37,14 @@ Ext.application({
         'Comment',
         'GooglePlaces',
         'Places',
-        'Result'
+        'Result',
+        'Recieve'
     ],
 
 
 
     views: [
-
+        'NearbyList',
         'InputView',
         'LoginPanel',
         'MainPanel',
@@ -62,8 +63,8 @@ Ext.application({
 
     stores: [
         'GooglePlacesStore',
-        'SearchStore'
-        //'PlacesStore'
+        'SearchStore',
+        'CommentStore'
     ],
 
     controllers: [

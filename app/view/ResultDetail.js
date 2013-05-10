@@ -6,7 +6,7 @@ Ext.define('Accessible.view.ResultDetail', {
         styleHtmlContent: true,
         scrollable: 'vertical',
         title: 'Details',
-        tpl: 'Hello, {location} {address}' 
+        tpl: 'Hello, {name} {address}' 
         
     }
 });
