@@ -35,36 +35,33 @@ Ext.application({
 
     models:[
         'Comment',
-        'GooglePlaces',
         'Places',
         'Result',
-        'Recieve'
+        'TopComment'
     ],
 
 
 
     views: [
-        'NearbyList',
+        'TopCommented',
         'InputView',
         'LoginPanel',
         'MainPanel',
-        'SearchResult',
         'SearchResultDetail',
         'LoginPanel',
         'InputView',
         'CheckInResult',
         'MapPanel',
-        'resultList',
-        'ResultDetail'
+        'ResultList'
+
 
 
 
     ],
 
     stores: [
-        'GooglePlacesStore',
         'SearchStore',
-        'CommentStore'
+        'TopCommentStore'
     ],
 
     controllers: [

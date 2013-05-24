@@ -3,10 +3,12 @@ Ext.define('Accessible.model.Comment', {
 
     config: {
 
-        fields: ['soundLvl', 'text', 'userName', 'userId'],
+        fields: ['soundLvl', 'text', 'userName', 'userId', 'restaurantId', 'flagged', 'id', 'timeStamp', 'lat','lon'],
         proxy: {
             type: 'rest',
-            url : 'http://213.103.219.219:8080/projektgrupp_f/api/v1/comments'
+            url : 'http://213.103.211.100:8080/api/v1/comments'
+
+
 
         }
 

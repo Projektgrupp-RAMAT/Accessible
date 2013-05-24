@@ -21,17 +21,8 @@ Ext.define('Accessible.store.PlacesStore', {
             extraParams: {
 
                 type: 'place',
-                distance: '200'
+                distance: '40'
             }
-        }/*,
-        listeners: {
-            'load': function (store) {
-                console.log(store.getCount());
-
-
-            }
-        }  */
-
-
+        }
     }
 });

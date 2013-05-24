@@ -1,7 +1,5 @@
 
 function makeMarker(latlon, comp, name) {
-    console.log("hehehe");
-    console.log(comp.down('#theMap').map);
     var marker = new google.maps.Marker({
         position: latlon,
         map: comp.down('#theMap').map,
@@ -16,18 +14,21 @@ function makeMarker(latlon, comp, name) {
 Ext.define('Accessible.view.SearchResultDetail', {
     extend: 'Ext.Container',
     xtype: 'search-detail',
+    id: 'search-detail',
+    requires: ['Accessible.store.CommentStore', 'Accessible.store.SearchStore'],
     config: {
-        hus: null,
-        scrollable: false,
+
         styleHtmlContent: true,
+        fullscreen: true,
+
         layout: 'vbox',
+
         items: [
             {
                 id: 'content',
                 tpl: [
-                    '<img src="{icon}"</img>',
-                    '<h3>{name}</h3>',
-                    '<div> {vicinity} <br>  </div>',
+                    '<img src="{icon}" align="left" style="padding-right:5px; padding-bottom: 5px" </img> <div><h4> {name}, <br> {address} </h4> </div>'
+
                 ].join('')
             },
             {
@@ -40,7 +41,7 @@ Ext.define('Accessible.view.SearchResultDetail', {
                 listeners: {
                     maprender: function(comp, map) {
                        
-                        var cmp = Ext.ComponentQuery.query('search-detail')[0];
+                        var cmp = Ext.getCmp('search-detail');
                         var marker = new google.maps.Marker({
                             position: cmp.down("#content").getData().location,
                             map: map,
@@ -54,10 +55,8 @@ Ext.define('Accessible.view.SearchResultDetail', {
             },
             {
                 id: 'comments',
-                tpl: [
-                    '<tpl if="rating">Very nice place, I gief sound rating of: {rating}</tpl>'
+                store: 'Accessible.store.CommentStore'
 
-                ]
 
             },
             {
@@ -65,13 +64,50 @@ Ext.define('Accessible.view.SearchResultDetail', {
                 action: 'commentButton',
                 ui: 'greyButton',
                 text: 'Add comment',
-                id: 'commentButton'
+                id: 'commentButton',
+                iconCls : 'compose1',
+                iconAlign: 'right',
+                iconMask: true
+
+
+            },
+
+            {
+                xtype: 'button',
+                action: 'checkInButton',
+                ui: 'fbButton',
+                text: 'Check in at a nearby place!',
+                handler: function(){
+                    if(Accessible.fbLoggedIn === '1'){
+                    if(!this.overlay){
+                        var view = Ext.ClassManager.instantiate('Accessible.view.CheckInResult', {
+                            itemId: 'overlayView'
+                        })
+                        this.overlay = Ext.Viewport.add(view);
+
+                    }
+                    this.overlay.show();
+                    }
+                }
+            },
+            {
+                xtype: 'list' ,
+                id: 'commentList',
+                action: 'commentList',
+                flex: 1,
+                disableSelection: true,
+                store: 'commentstore',
+                itemTpl: '<img src="http://graph.facebook.com/' + '{userId}' + '/picture"  align="left" style="padding:5px;"/> <b>{userName}</b> {timeStamp} <tpl if="flagged=='+"'false'"+'"><div class="reportButton" id="reportButtn"> <img src="img/warning_black.png" style="width: 30px; height: 30px;" align="right" id="repBtn"></div><tpl else><br></tpl> {text} - Sound rating:{soundLvl}'
 
             }
 
+
+
         ],
-        record: null,
+        record: null
     },
+
+
     updateRecord: function(newRecord) {
 
         if (newRecord) {
@@ -83,7 +119,6 @@ Ext.define('Accessible.view.SearchResultDetail', {
 
         }
     }
-
 
 });
 

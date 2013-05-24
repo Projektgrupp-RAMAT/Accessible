@@ -15,30 +15,27 @@ Ext.define('Accessible.view.InputView', {
                 xtype: 'spinnerfield',
                 id: 'commentSoundLvl',
                 label: 'Soundlevel',
-                labelWidth: '35%'
+                labelWidth: '35%',
+                minValue: 0,
+                maxValue: 10,
+                stepValue: 0.1,
+                cycle: true
             },
             {
-                xtype: 'textfield',
+                xtype: 'textareafield',
                 id: 'commentText',
                 label: 'Comment',
-                labelWidth: '35%'
+                labelWidth: '35%',
+                placeHolder: 'Enter your comment..'
+
             },
-            {
-                xtype: 'togglefield',
-                label: 'Handicap friendly',
-                labelWidth: '35%'
-            },
-            {
-                xtype: 'togglefield',
-                label: 'Changing table',
-                labelWidth: '35%'
-            },
+
             {
                 xtype: 'button',
                 action: 'sendCommentButton',
                 ui: 'confirm',
                 text: 'Submit'
-            },
+            }/*,
             {
                 xtype: 'button',
                 action: 'checkInButton',
@@ -55,7 +52,7 @@ Ext.define('Accessible.view.InputView', {
                     this.overlay.show();
 
                 }
-            }
+            }  */
 
         ],
         listeners: [
@@ -78,7 +75,7 @@ Ext.define('Accessible.view.InputView', {
 
         FB.api('/me/checkins', 'post',
             {
-                message: Ext.ComponentQuery.query('#fbCommentText')[0].getValue(),
+                message: Ext.getCmp('fbCommentText').getValue(),
 
                 place: checkInId,//this.data.get('id'),
                 coordinates: {

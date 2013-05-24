@@ -3,10 +3,15 @@ Ext.define('Accessible.store.SearchStore',{
     
     config: {
         model:'Accessible.model.Result',
-        
-        grouper: function (record){
-            return record.get('name')[0];
+
+
+
+        listeners: {
+            exception: function(proxy, response, operation){
+                console.log(response.message + 'searchStore');
+            }
         }
 
     }
+
 });

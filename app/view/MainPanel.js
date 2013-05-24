@@ -7,19 +7,21 @@
  */
 
 function getResultList() {
-	var comp = Ext.ComponentQuery.query('map')[0];
-//    console.log( Ext.ComponentQuery.query(resultlist)[0]);
-//   var store = Ext.ComponentQuery.query('resultlist')[0].getStore();
-//   store.removeAll();
+	var comp = Ext.getCmp('map');
+
+
     var request = {
-        query: Ext.ComponentQuery.query('#locationField')[0].getValue()+' in '+Ext.ComponentQuery.query('#nameField')[0].getValue()
+        query:  Ext.getCmp('nameField').getValue() + ' in ' + Ext.getCmp('locationField').getValue()
     };
     var service = new google.maps.places.PlacesService(comp.getMap());
+
+
     service.textSearch(request, function(results, status) {
 		if (status === google.maps.places.PlacesServiceStatus.OK) {
-          Ext.ComponentQuery.query('resultlist')[0].getStore().removeAll();          
+          Ext.getCmp('resultlist').getStore().removeAll();
         for (var i = 0; i < results.length; i++) {
             detailResult(results[i]);
+
         }
 		}
 		 if (status === google.maps.places.PlacesServiceStatus.ERROR) {
@@ -49,23 +51,17 @@ function getResultList() {
 }
 
 function detailResult(result) {
-	var store = Ext.ComponentQuery.query('resultlist')[0].getStore();
-//	var service = new google.maps.places.PlacesService(Ext.ComponentQuery.query('map')[0].getMap());
-//    var request1 = {reference: result.reference};
-//    service.getDetails(request1, function(details, status) {
-//        if (status === google.maps.places.PlacesServiceStatus.OK)
-//        {
-      //  if(result.formatted_address)
-            console.log(result.name+result.formatted_address)
-            store.add({name: result.name, address: result.formatted_address,icon: result.icon, vicinty: result.vicinty,location: result.geometry.location});
-//        }
-//        else
-//        {
-//            store.add({name: result.name, address: 'N/A'});
-//        }
-
-//    });
-	
+    var match=false;
+	var store = Ext.getCmp('resultlist').getStore();
+    var topStore = Ext.getStore('TopCommentStore');
+    for(var i = 0; i < topStore.getCount(); i++)
+    {
+        if(topStore.getAt(i).get('restaurantId') == result.id)
+        {
+            match='true';
+        }
+    }
+    store.add({name: result.name, address: result.formatted_address,icon: result.icon, vicinty: result.vicinty,location: result.geometry.location, id: result.id, referenceId: result.reference,commented: match});
 }
 
 Ext.define('Accessible.view.MainPanel', {
@@ -76,9 +72,9 @@ Ext.define('Accessible.view.MainPanel', {
     xtype: 'mainView',
     id: 'mainViewId',
     requires: [
-        'Accessible.view.resultList',
+        'Accessible.view.ResultList',
         'Accessible.view.SearchResultDetail',
-        'Accessible.view.NearbyList'
+        'Accessible.view.TopCommented'
     ],
     config: {
 
@@ -94,7 +90,6 @@ Ext.define('Accessible.view.MainPanel', {
                         xtype: 'panel',
                         id: 'HomePanel',
                         title: 'Home',
-                        //html: "<div>[Placeholder]</div>",
                         styleHtmlContent: true,
                         items: [
 
@@ -112,6 +107,7 @@ Ext.define('Accessible.view.MainPanel', {
                             },
                             {
                                 xtype: 'map',
+                                id: 'map'
                             }
                          
 
@@ -126,12 +122,14 @@ Ext.define('Accessible.view.MainPanel', {
                 title: 'Search',
                 iconCls: 'search',
                 id: 'searchNav',
+                autoDestroy: true,
                 items: [
                     {
                         xtype: 'formpanel',
                         title: 'Search',
                         id: 'SearchPanel',
                         styleHtmlContent: true,
+                        scrollable: false,
                         items: [
                             {
                                 xtype: 'textfield',
@@ -145,14 +143,7 @@ Ext.define('Accessible.view.MainPanel', {
                                 id: 'locationField',
                                 placeHolder: 'Street, City'
                             },
-                            {
-                                xtype: 'spinnerfield',
-                                label: 'Soundlevel',
-                                id: 'soundLevelField',
-                                maxValue: 5,
-                                minValue: 1,
-                                defaultValue: 2.5
-                            },
+
                             {
                                 xtype: 'button',
                                 ui: 'greyButton',
@@ -160,19 +151,20 @@ Ext.define('Accessible.view.MainPanel', {
                                 itemId: 'searchButton'
                             }
                         ]
+                        
                     }
-                ]
+                ] 
             },
             {
                 xtype: 'navigationview',
-                title: 'List nearby',
+                title: 'Top Commented',
                 id: 'listNav',
-                iconCls: 'locate',
+                iconCls: 'chart1',
                 items: [
                     {
-                        xtype: 'nearbylist',
+                        xtype: 'TopCommented',
                         id: 'ListNavView',
-                        title: 'Commented nearby',
+                        title: 'Top commented',
 
                         styleHtmlContent: true
                     }
@@ -186,27 +178,26 @@ Ext.define('Accessible.view.MainPanel', {
                     {
                         xtype: 'Gmaps',
                         title: 'Maps',
-                        useCurrentLocation: true,
+                        autoupdate: false,
+                        useCurrentLocation: {autoupdate: false}
                     }
                 ]
             }
         ],
         tabBar: {
-            docked: 'bottom'
+            docked: 'bottom',
         },
         listeners: [
-            {
-                fn: 'onSearchButtonTap',
-                event: 'tap',
-                delegate: '#searchButton'
-            }
+                        {
+                            fn: 'onSearchButtonTap',
+                            event: 'tap',
+                            delegate: '#searchButton'
+                        }
         ]
     },
-
     onSearchButtonTap: function () {
 
 
-      
         getResultList();
         Ext.getCmp('searchNav').push({xtype: 'resultlist'});
 
@@ -231,12 +222,6 @@ Ext.define('Accessible.view.MainPanel', {
     initialize: function () {
 
         
-        
-        console.log(FB.getAccessToken());
-
-        console.log("Commented list getting filled");
-        Ext.ComponentQuery.query('nearbylist')[0].getStore().load();
-        
         logOutButton = Ext.create('Ext.Button', {
 
             action : 'logOutButton',
@@ -257,19 +242,19 @@ Ext.define('Accessible.view.MainPanel', {
 
             if( Accessible.fbLoggedIn === '1' ){
 
-            document.getElementById('myText').innerHTML = 'Welcome to Eat & Hear ' + response.name + '!';
+            document.getElementById('myText').innerHTML = 'Welcome to Eat & Hear ' + response.name + '! <br> Navigate by using the controls below, the <b>Search tab</b> will give you options to search for locations, the <b>Top Commented</b> tab will show you the most commented locations, and last the <b>Maps tab </b>  will show you a map with markers for sorrounding locations.';
             document.getElementById('fbPic').innerHTML = '<img src="http://graph.facebook.com/' + response.id + '/picture" />';
             }
             else {
 
-                document.getElementById('myText').innerHTML = 'Welcome to Eat & Hear Ronnie Sandahl';
-                document.getElementById('fbPic').innerHTML = '<img src="http://gfx.aftonbladet-cdn.se/image/15419059/76/normal/2bb99db0eeab4/ronnie-sandahl-byline-76.jpg" />';
+                document.getElementById('myText').innerHTML = 'Welcome to Eat & Hear! <br> You are logged in as a guest. To gain access to all the features please log in. <br> Navigate by using the controls below, the <b>Search tab</b> will give you options to search for locations, the <b>Top Commented</b> tab will show you the most commented locations, and last the <b>Maps tab </b>  will show you a map with markers for sorrounding locations. ';
+               // document.getElementById('fbPic').innerHTML = '<img src="img/eah.png" />';
 
             }
 
         });
 
-        console.log(Accessible.fbLoggedIn);
+
 
         this.callParent();
 
@@ -287,8 +272,8 @@ function addButton(view, buttonID){
         ui: 'fbButton',
         iconMask : true,
         text: 'Logout',
-        align : 'right',
-        html: '<img src= http://gfx.aftonbladet-cdn.se/image/15419059/76/normal/2bb99db0eeab4/ronnie-sandahl-byline-76.jpg width=auto align=right>'
+        align : 'right'
+
     });
 
 

@@ -1,23 +1,23 @@
 var mapResults;
 
 function showDetail(target, record) {
-
-    var comp = Ext.ComponentQuery.query('#searchNav')[0];
-    this.showResults = Ext.create('Accessible.view.SearchResultDetail', {title: record.get('name'), record: record});
+    Ext.getCmp('listNav').remove(Ext.getCmp('search-detail'),true);
+    var comp = Ext.getCmp('searchNav');
+    this.showResults = Ext.create('Accessible.view.SearchResultDetail', {title: record.get('name'), record: record, store: 'Accessible.store.CommentStore'});
     this.showResults.setRecord(record);
     comp.push(this.showResults);
 
     if (Accessible.fbLoggedIn === '1') {
         var fbPlacesStore = Ext.create('Accessible.store.PlacesStore', {
             extraParams: {
-                center: record.get('location').kb + ',' + record.get('location').lb,
+                center: record.get('location').jb + ',' + record.get('location').kb,
                 access_token: FB.getAccessToken()
             }
         });
 
         fbPlacesStore.load({
             params: {
-                center: record.get('location').kb + ',' + record.get('location').lb,
+                center: record.get('location').jb + ',' + record.get('location').kb,
                 access_token: FB.getAccessToken()
             }
         })
@@ -25,25 +25,44 @@ function showDetail(target, record) {
     }
 }
 
-Ext.define('Accessible.view.resultList', {
+Ext.define('Accessible.view.ResultList', {
     extend: 'Ext.List',
     xtype: 'resultlist',
-    requires: ['Accessible.store.SearchStore', 'Accessible.view.MapPanel'],
+    id: 'resultlist',
+    requires: ['Accessible.store.SearchStore', 'Accessible.view.MapPanel', 'Accessible.store.CommentStore'],
     config: {
-        title: 'List',
-        itemId: 'myList',
+        data:null,
+        title: 'Search Results',
+        itemId: 'searchResultList',
         indexBar: false,
-        itemTpl: '{name} {address}',
+        itemTpl: '<img src="{icon}" align="left" style="padding-right:5px; padding-bottom: 5px" width=30px height=30px</img> {name} <tpl if="address">{address}</tpl> <tpl if="commented=='+"'true'"+'"> <img src="img/chart1.png" align="right" width="30px" height="30px"></tpl>',
         store: 'SearchStore',
         listeners:
                 {
                     itemtap: function(view, index, item, record, e, eOpts) {
                         if (e !== null)
                         {
-                            console.log('resultlist');
-                            showDetail(index, record);
+
+                            this.data = record;
+                            var commentStore = Ext.create('Accessible.store.CommentStore', {
+
+                                extraParams: {
+
+                                    restaurangId: record.get('id')
+
+                                }
+
+                                    });
+                            commentStore.load({
+                                params: {
+                                    id: record.get('id')
+                                }
+                            });
+                          commentStore.sort('timeStamp', 'DESC');
+                            showDetail(index,record);
+
                         }
                     }
                 }
-    },
+    }
 });
